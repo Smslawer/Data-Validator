@@ -9,6 +9,7 @@ plugins {
     id 'com.adarshr.test-logger' version '3.1.0'
     id 'application'
     id 'checkstyle'
+    id 'jacoco'
 }
 
 group = 'hexlet.code'
@@ -33,6 +34,20 @@ repositories {
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacoco')
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.7"
 }
 
 checkstyle {

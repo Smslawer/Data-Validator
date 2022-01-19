@@ -1,4 +1,4 @@
-name: actions-validate
+name: actions-differ
 
 on: [ push ]
 
@@ -17,3 +17,7 @@ jobs:
         uses: paambaati/codeclimate-action@v3.0.0
         env:
           CC_TEST_REPORTER_ID: ${{secrets.TEST_COVEREGE_ID_LVL3}}
+          JACOCO_SOURCE_PATH: ${{github.workspace}}/src/main/java
+        with:
+          coverageCommand: make report
+          coverageLocations: ${{github.workspace}}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
