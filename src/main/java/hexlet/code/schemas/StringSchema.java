@@ -1,56 +1,34 @@
 package hexlet.code.schemas;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
 
-import java.util.List;
-
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public class StringSchema {
-    private String valid;
-    private String contain;
-    private Integer minLength;
-    private boolean req = true;
+public class StringSchema extends BasedSchema {
 
-    public final boolean isValid(String isValid) {
-        this.valid = isValid;
-        boolean result = true;
-
-        if (isValid == null || isValid.isEmpty()) {
-            return req;
-        }
-
-        if (contain != null) {
-            List<String> splitted = List.of(isValid.split(" "));
-            result = splitted.contains(contain);
-        }
-
-        if (minLength != null && minLength > 0) {
-            return isValid.length() >= minLength;
-        }
-
-        return result;
-    }
-
-    public final void required() {
-        if (valid == null) {
-            valid = "";
-        }
-        if (valid.isEmpty()) {
-            this.req = false;
-        }
+    public final StringSchema required() {
+        check(Objects::nonNull);
+        check(value -> value instanceof String);
+        check(value -> !(((String) value).trim().isEmpty()));
+        return this;
     }
 
     public final StringSchema contains(String isContain) {
-        this.contain = isContain;
+        check(value -> value == null
+                || value instanceof String
+                && ((String) value).contains(isContain));
         return this;
     }
 
     public final StringSchema minLength(int length) {
-        this.minLength = length;
+        check(value -> value == null
+                || value instanceof String
+                && ((String) value).trim().length() >= length);
         return this;
     }
-
 }
