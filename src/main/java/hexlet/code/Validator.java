@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import hexlet.code.schemas.MapSchema;
 import hexlet.code.schemas.NumberSchema;
 import hexlet.code.schemas.StringSchema;
 import lombok.Data;
@@ -13,6 +14,10 @@ public class Validator {
 
     public final NumberSchema number() {
         return new NumberSchema();
+    }
+
+    public final MapSchema map() {
+        return new MapSchema();
     }
 
 }
