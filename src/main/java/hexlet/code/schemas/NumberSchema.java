@@ -3,7 +3,7 @@ package hexlet.code.schemas;
 
 import java.util.Objects;
 
-public class NumberSchema extends BasedSchema {
+public class NumberSchema extends BaseSchema {
     public final void required() {
         check(Objects::nonNull);
         check(value -> value instanceof Integer);

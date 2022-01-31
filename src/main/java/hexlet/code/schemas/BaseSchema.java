@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 @Data
-public class BasedSchema {
+public class BaseSchema {
     private final List<Predicate<Object>> valid = new ArrayList<>();
 
     /**

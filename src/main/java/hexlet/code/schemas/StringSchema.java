@@ -9,7 +9,7 @@ import java.util.Objects;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public class StringSchema extends BasedSchema {
+public class StringSchema extends BaseSchema {
 
     public final StringSchema required() {
         check(Objects::nonNull);
