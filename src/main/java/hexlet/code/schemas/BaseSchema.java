@@ -26,7 +26,7 @@ public class BaseSchema {
     /**
      * @param predicate
      */
-    public void check(Predicate<Object> predicate) {
+    protected void addCheck(Predicate<Object> predicate) {
         this.valid.add(predicate);
     }
 }

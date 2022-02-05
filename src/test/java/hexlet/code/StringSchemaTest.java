@@ -42,6 +42,10 @@ public class StringSchemaTest {
         assertTrue(schema.contains("what").isValid("what does the fox say"));
 
         assertFalse(schema.contains("whatthe").isValid("what does the fox say"));
+
+        assertTrue(schema.isValid("what whatthe does the fox say"));
+
+        assertFalse(schema.isValid("what does the fox say"));
     }
 
     @Test
