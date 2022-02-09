@@ -13,14 +13,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MapSchemaTest {
     private static MapSchema schema;
+    private static Validator validator;
 
     /**
      * Make new Validator before each test.
      */
     @BeforeEach
     public void setValidator() {
-        Validator valid = new Validator();
-        schema = valid.map();
+        validator = new Validator();
+        schema = validator.map();
     }
 
     @Test
@@ -59,32 +60,29 @@ public class MapSchemaTest {
 
     @Test
     void testShape() {
-        Validator valid = new Validator();
-        MapSchema mapSchema = valid.map();
-
         Map<String, BaseSchema> schemas = new HashMap<>();
-        schemas.put("name", valid.string().required());
-        schemas.put("age", valid.number().positive());
-        mapSchema.shape(schemas);
+        schemas.put("name", validator.string().required());
+        schemas.put("age", validator.number().positive());
+        schema.shape(schemas);
 
         Map<String, Object> human1 = new HashMap<>();
         human1.put("name", "Kolya");
-        human1.put("age", Integer.parseInt("100"));
-        assertTrue(mapSchema.isValid(human1));
+        human1.put("age", 100);
+        assertTrue(schema.isValid(human1));
 
         Map<String, Object> human2 = new HashMap<>();
         human2.put("name", "Maya");
         human2.put("age", null);
-        assertTrue(mapSchema.isValid(human2));
+        assertTrue(schema.isValid(human2));
 
         Map<String, Object> human3 = new HashMap<>();
         human3.put("name", "");
         human3.put("age", null);
-        assertFalse(mapSchema.isValid(human3));
+        assertFalse(schema.isValid(human3));
 
         Map<String, Object> human4 = new HashMap<>();
         human4.put("name", "Valya");
-        human4.put("age", Integer.parseInt("-5"));
-        assertFalse(mapSchema.isValid(human4));
+        human4.put("age", -5);
+        assertFalse(schema.isValid(human4));
     }
 }

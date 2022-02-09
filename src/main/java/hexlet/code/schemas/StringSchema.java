@@ -1,12 +1,7 @@
 package hexlet.code.schemas;
 
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-
 import java.util.Objects;
 
-@EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
 public class StringSchema extends BaseSchema {
 
     public final StringSchema required() {

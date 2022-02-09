@@ -1,9 +1,9 @@
 package hexlet.code.schemas;
 
-
 import java.util.Objects;
 
 public class NumberSchema extends BaseSchema {
+
     public final void required() {
         addCheck(Objects::nonNull);
         addCheck(value -> value instanceof Integer);
